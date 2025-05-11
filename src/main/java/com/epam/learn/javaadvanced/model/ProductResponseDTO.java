@@ -1,7 +1,9 @@
 package com.epam.learn.javaadvanced.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.math.BigDecimal;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductResponseDTO {
     private Long id;
     private String name;
