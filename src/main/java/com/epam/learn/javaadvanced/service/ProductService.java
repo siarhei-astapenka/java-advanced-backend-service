@@ -13,4 +13,5 @@ public interface ProductService {
     ProductResponseDTO saveProduct(ProductRequestDTO productRequestDTO);
     ResponseEntity<ProductResponseDTO> putProduct(Long id, ProductRequestDTO productDTO);
     void deleteProductById(Long id);
+    int getProductCount();
 }

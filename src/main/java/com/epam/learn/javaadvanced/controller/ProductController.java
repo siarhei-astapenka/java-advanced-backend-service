@@ -3,6 +3,7 @@ package com.epam.learn.javaadvanced.controller;
 import com.epam.learn.javaadvanced.model.ProductRequestDTO;
 import com.epam.learn.javaadvanced.model.ProductResponseDTO;
 import com.epam.learn.javaadvanced.service.ProductService;
+import io.micrometer.core.annotation.Timed;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -33,24 +34,28 @@ public class ProductController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @Timed(value = "products.get.all", description = "Time taken to get all products")
     List<ProductResponseDTO> getProducts() {
         return productService.getProducts();
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @Timed(value = "products.get.by.id", description = "Time taken to get product by ID")
     Optional<ProductResponseDTO> getProductById(@PathVariable @NotNull @Min(1) Long id) {
         return productService.getProductById(id);
     }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
+    @Timed(value = "products.post", description = "Time taken to post a new product")
     ProductResponseDTO saveProduct(@Valid @RequestBody ProductRequestDTO productRequest) {
         return productService.saveProduct(productRequest);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Timed(value = "products.put.by.id", description = "Time taken to update existing/create new product by ID")
     ResponseEntity<ProductResponseDTO> putProduct(@PathVariable @NotNull @Min(1) Long id,
                                        @Valid @RequestBody ProductRequestDTO productRequest) {
         return productService.putProduct(id, productRequest);
@@ -58,6 +63,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @Timed(value = "products.delete.by.id", description = "Time taken to delete product by ID")
     void deleteProduct(@PathVariable @NotNull @Min(1) Long id) {
         productService.deleteProductById(id);
     }

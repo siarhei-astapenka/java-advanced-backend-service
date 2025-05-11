@@ -4,6 +4,7 @@ import com.epam.learn.javaadvanced.dao.ProductDAO;
 import com.epam.learn.javaadvanced.entity.Product;
 import com.epam.learn.javaadvanced.model.ProductRequestDTO;
 import com.epam.learn.javaadvanced.model.ProductResponseDTO;
+import com.epam.learn.javaadvanced.monitor.ProductMetricsService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,14 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService{
     private final ProductDAO productDAO;
     private final ModelMapper modelMapper;
+    private final ProductMetricsService metricsService;
 
-    public ProductServiceImpl(ProductDAO productDAO, ModelMapper modelMapper) {
+    public ProductServiceImpl(ProductDAO productDAO,
+                              ModelMapper modelMapper,
+                              ProductMetricsService metricsService) {
         this.productDAO = productDAO;
         this.modelMapper = modelMapper;
+        this.metricsService = metricsService;
     }
 
     @Override
@@ -40,6 +45,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public ProductResponseDTO saveProduct(ProductRequestDTO productRequestDTO) {
+        metricsService.incrementCreationCount();
         Product product = modelMapper.map(productRequestDTO, Product.class);
         Product savedProduct = productDAO.saveProduct(product);
         return modelMapper.map(savedProduct, ProductResponseDTO.class);
@@ -52,6 +58,9 @@ public class ProductServiceImpl implements ProductService{
 
         if (isProductExist) {
             product.setId(id);
+            metricsService.incrementUpdateCount();
+        } else {
+            metricsService.incrementCreationCount();
         }
 
         Product updatedProduct = productDAO.saveProduct(product);
@@ -64,7 +73,13 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void deleteProductById(Long id) {
+        metricsService.incrementDeletionCount();
         productDAO.deleteProductById(id);
+    }
+
+    @Override
+    public int getProductCount() {
+        return productDAO.getProducts().size();
     }
 
     private boolean isProductExist(Long id) {

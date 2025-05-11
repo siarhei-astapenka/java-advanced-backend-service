@@ -1,0 +1,73 @@
+### Authenticate as ADMIN
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "roles": ["ADMIN"]
+}
+
+### ### Authenticate as USER
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "user",
+  "roles": ["USER"]
+}
+
+
+### Add product. Use Bearer token from /api/auth/login response. Only for ADMIN role.
+POST http://localhost:8080/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDY5OTM2NjMsImlhdCI6MTc0Njk5MDA2Mywicm9sZXMiOlsiQURNSU4iXX0.YIYvFFiNO9zE2U8uYzWBctECxhbWcJb182cYhUI1AxeabzkItfmOKnGr0zsTiv98qQrp0H76xyL45T9RiGAM_auLahgo53bn9n9VHTZat9wzf9ln8f0cAeSIYDHCYsyf7sinWDJrSgkDE_lD3vhpuDEUdjtKVzK0lCcHe3QR-T6mnhKb_JbgpZYMTLncNneCObi1iAriCts4CkEHs8XPHOZhkDXgUN7X6aLpyaopE_hdzTJZcLMzCYbUaqz1OOvTr8-FA9DVieMiu-IaJSpSnUA1VCzd6NFQ3zZYeejcULtW3gILBmofJnrDVCdFHaTfLCcYmoW-BfNNmKEkDTm_QQ
+
+{
+  "name": "Product1",
+  "price": 100
+}
+
+
+### Update product by id. Use Bearer token from /api/auth/login response. Only for ADMIN role.
+PUT http://localhost:8080/products/10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDY5OTM2NjMsImlhdCI6MTc0Njk5MDA2Mywicm9sZXMiOlsiQURNSU4iXX0.YIYvFFiNO9zE2U8uYzWBctECxhbWcJb182cYhUI1AxeabzkItfmOKnGr0zsTiv98qQrp0H76xyL45T9RiGAM_auLahgo53bn9n9VHTZat9wzf9ln8f0cAeSIYDHCYsyf7sinWDJrSgkDE_lD3vhpuDEUdjtKVzK0lCcHe3QR-T6mnhKb_JbgpZYMTLncNneCObi1iAriCts4CkEHs8XPHOZhkDXgUN7X6aLpyaopE_hdzTJZcLMzCYbUaqz1OOvTr8-FA9DVieMiu-IaJSpSnUA1VCzd6NFQ3zZYeejcULtW3gILBmofJnrDVCdFHaTfLCcYmoW-BfNNmKEkDTm_QQ
+
+{
+  "id": 10,
+  "name": "P0",
+  "price": 1000.11
+}
+
+### Delete product by id. Use Bearer token from /api/auth/login response. Only for ADMIN role.
+DELETE http://localhost:8080/products/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDY5OTM2NjMsImlhdCI6MTc0Njk5MDA2Mywicm9sZXMiOlsiQURNSU4iXX0.YIYvFFiNO9zE2U8uYzWBctECxhbWcJb182cYhUI1AxeabzkItfmOKnGr0zsTiv98qQrp0H76xyL45T9RiGAM_auLahgo53bn9n9VHTZat9wzf9ln8f0cAeSIYDHCYsyf7sinWDJrSgkDE_lD3vhpuDEUdjtKVzK0lCcHe3QR-T6mnhKb_JbgpZYMTLncNneCObi1iAriCts4CkEHs8XPHOZhkDXgUN7X6aLpyaopE_hdzTJZcLMzCYbUaqz1OOvTr8-FA9DVieMiu-IaJSpSnUA1VCzd6NFQ3zZYeejcULtW3gILBmofJnrDVCdFHaTfLCcYmoW-BfNNmKEkDTm_QQ
+
+### Get all products. Use Bearer token from /api/auth/login response. Only for ADMIN and USER role.
+GET http://localhost:8080/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDY5OTM2NjMsImlhdCI6MTc0Njk5MDA2Mywicm9sZXMiOlsiQURNSU4iXX0.YIYvFFiNO9zE2U8uYzWBctECxhbWcJb182cYhUI1AxeabzkItfmOKnGr0zsTiv98qQrp0H76xyL45T9RiGAM_auLahgo53bn9n9VHTZat9wzf9ln8f0cAeSIYDHCYsyf7sinWDJrSgkDE_lD3vhpuDEUdjtKVzK0lCcHe3QR-T6mnhKb_JbgpZYMTLncNneCObi1iAriCts4CkEHs8XPHOZhkDXgUN7X6aLpyaopE_hdzTJZcLMzCYbUaqz1OOvTr8-FA9DVieMiu-IaJSpSnUA1VCzd6NFQ3zZYeejcULtW3gILBmofJnrDVCdFHaTfLCcYmoW-BfNNmKEkDTm_QQ
+
+### Get product by id. Use Bearer token from /api/auth/login response. Only for ADMIN and USER role.
+GET http://localhost:8080/products/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDY5OTM2NjMsImlhdCI6MTc0Njk5MDA2Mywicm9sZXMiOlsiQURNSU4iXX0.YIYvFFiNO9zE2U8uYzWBctECxhbWcJb182cYhUI1AxeabzkItfmOKnGr0zsTiv98qQrp0H76xyL45T9RiGAM_auLahgo53bn9n9VHTZat9wzf9ln8f0cAeSIYDHCYsyf7sinWDJrSgkDE_lD3vhpuDEUdjtKVzK0lCcHe3QR-T6mnhKb_JbgpZYMTLncNneCObi1iAriCts4CkEHs8XPHOZhkDXgUN7X6aLpyaopE_hdzTJZcLMzCYbUaqz1OOvTr8-FA9DVieMiu-IaJSpSnUA1VCzd6NFQ3zZYeejcULtW3gILBmofJnrDVCdFHaTfLCcYmoW-BfNNmKEkDTm_QQ
+
+### Actuator /health.
+GET http://localhost:8080/actuator/health
+
+### Actuator /info
+GET http://localhost:8080/actuator/info
+
+### Actuator available metrics. Use Bearer token from /api/auth/login response. Only for ADMIN role.
+GET http://localhost:8080/actuator/metrics
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDY5OTM2NjMsImlhdCI6MTc0Njk5MDA2Mywicm9sZXMiOlsiQURNSU4iXX0.YIYvFFiNO9zE2U8uYzWBctECxhbWcJb182cYhUI1AxeabzkItfmOKnGr0zsTiv98qQrp0H76xyL45T9RiGAM_auLahgo53bn9n9VHTZat9wzf9ln8f0cAeSIYDHCYsyf7sinWDJrSgkDE_lD3vhpuDEUdjtKVzK0lCcHe3QR-T6mnhKb_JbgpZYMTLncNneCObi1iAriCts4CkEHs8XPHOZhkDXgUN7X6aLpyaopE_hdzTJZcLMzCYbUaqz1OOvTr8-FA9DVieMiu-IaJSpSnUA1VCzd6NFQ3zZYeejcULtW3gILBmofJnrDVCdFHaTfLCcYmoW-BfNNmKEkDTm_QQ
+
+### Actuator one of custom metrics. Use Bearer token from /api/auth/login response. Only for ADMIN role.
+GET http://localhost:8080/actuator/metrics/products.get.all
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDY5OTM2NjMsImlhdCI6MTc0Njk5MDA2Mywicm9sZXMiOlsiQURNSU4iXX0.YIYvFFiNO9zE2U8uYzWBctECxhbWcJb182cYhUI1AxeabzkItfmOKnGr0zsTiv98qQrp0H76xyL45T9RiGAM_auLahgo53bn9n9VHTZat9wzf9ln8f0cAeSIYDHCYsyf7sinWDJrSgkDE_lD3vhpuDEUdjtKVzK0lCcHe3QR-T6mnhKb_JbgpZYMTLncNneCObi1iAriCts4CkEHs8XPHOZhkDXgUN7X6aLpyaopE_hdzTJZcLMzCYbUaqz1OOvTr8-FA9DVieMiu-IaJSpSnUA1VCzd6NFQ3zZYeejcULtW3gILBmofJnrDVCdFHaTfLCcYmoW-BfNNmKEkDTm_QQ
+
+### Actuator prometeus. Use Bearer token from /api/auth/login response. Only for ADMIN role.
+GET http://localhost:8080/actuator/prometheus
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NDY5OTM2NjMsImlhdCI6MTc0Njk5MDA2Mywicm9sZXMiOlsiQURNSU4iXX0.YIYvFFiNO9zE2U8uYzWBctECxhbWcJb182cYhUI1AxeabzkItfmOKnGr0zsTiv98qQrp0H76xyL45T9RiGAM_auLahgo53bn9n9VHTZat9wzf9ln8f0cAeSIYDHCYsyf7sinWDJrSgkDE_lD3vhpuDEUdjtKVzK0lCcHe3QR-T6mnhKb_JbgpZYMTLncNneCObi1iAriCts4CkEHs8XPHOZhkDXgUN7X6aLpyaopE_hdzTJZcLMzCYbUaqz1OOvTr8-FA9DVieMiu-IaJSpSnUA1VCzd6NFQ3zZYeejcULtW3gILBmofJnrDVCdFHaTfLCcYmoW-BfNNmKEkDTm_QQ
