@@ -3,7 +3,7 @@ package com.epam.learn.javaadvanced.service;
 import com.epam.learn.javaadvanced.domain.dto.ItemEntityDto;
 import com.epam.learn.javaadvanced.domain.repository.ItemRepository;
 import com.epam.learn.javaadvanced.service.mapper.ItemMapper;
-import com.epam.learn.javaadvanced.web.dto.external.RakutenApiResponse;
+import com.epam.learn.javaadvanced.web.model.external.RakutenApiResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
