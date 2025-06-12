@@ -6,7 +6,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface ItemRepository extends ReactiveCrudRepository<ItemEntity, Integer> {
-    Mono<ItemEntity> findByName(String name);
     Flux<ItemEntity> findByNameContainingIgnoreCase(String name);
     Mono<Boolean> existsByName(String name);
 }
