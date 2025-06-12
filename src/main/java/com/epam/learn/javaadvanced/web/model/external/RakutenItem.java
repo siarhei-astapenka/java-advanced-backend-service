@@ -1,4 +1,4 @@
-package com.epam.learn.javaadvanced.web.dto.external;
+package com.epam.learn.javaadvanced.web.model.external;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

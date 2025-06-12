@@ -2,8 +2,9 @@ package com.epam.learn.javaadvanced.service.mapper;
 
 import com.epam.learn.javaadvanced.domain.dto.ItemEntityDto;
 import com.epam.learn.javaadvanced.domain.entity.ItemEntity;
-import com.epam.learn.javaadvanced.web.dto.external.RakutenApiResponse;
-import com.epam.learn.javaadvanced.web.dto.external.RakutenItem;
+import com.epam.learn.javaadvanced.web.model.external.RakutenApiResponse;
+import com.epam.learn.javaadvanced.web.model.external.RakutenItem;
+import com.epam.learn.javaadvanced.web.model.internal.SportResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -46,5 +47,12 @@ public class ItemMapper {
         return dtos.stream()
                 .map(this::toItemEntity)
                 .collect(Collectors.toList());
+    }
+
+    public SportResponse toSportResponse(ItemEntity itemEntity) {
+        return SportResponse.builder()
+                .id(String.valueOf(itemEntity.getId()))
+                .name(itemEntity.getName())
+                .build();
     }
 }
