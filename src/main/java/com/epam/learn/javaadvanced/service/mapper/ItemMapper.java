@@ -7,7 +7,6 @@ import com.epam.learn.javaadvanced.web.dto.external.RakutenItem;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,16 +22,6 @@ public class ItemMapper {
     public ItemEntityDto toItemEntityDto(RakutenApiResponse.ItemContainer itemContainer) {
         RakutenItem rakutenItem = itemContainer.getItem();
         return ItemEntityDto.builder()
-                .id(Optional.ofNullable(rakutenItem.getGenreId())
-                        .filter(id -> !id.trim().isEmpty())
-                        .map(id -> {
-                            try {
-                                return Integer.parseInt(id);
-                            } catch (NumberFormatException e) {
-                                return 0; // or default value
-                            }
-                        })
-                        .orElse(null)) // or default value
                 .name(rakutenItem.getItemName())
                 .build();
     }

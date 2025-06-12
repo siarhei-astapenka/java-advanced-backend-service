@@ -33,7 +33,7 @@ public class RakutenItemService {
         return fetchItemsFromRakuten(keyword)
                 .flatMapMany(response -> Flux.fromIterable(response.getItems()))
                 .map(itemMapper::toItemEntityDto)
-                .flatMap(dto -> itemRepository.upsertWithReturn(itemMapper.toItemEntity(dto)))
+                .flatMap(dto -> itemRepository.save(itemMapper.toItemEntity(dto)))
                 .map(itemMapper::toItemEntityDto);
     }
 
